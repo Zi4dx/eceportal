@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة الهندسة الكهربائية - ECE Portal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Cairo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        engineer: {
+                            50: '#fff7ed', // Orange tint for Electrical/Power feel
+                            100: '#ffedd5',
+                            500: '#f97316', // Orange primary
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        },
+                        secondary: {
+                            500: '#475569', 
+                        }
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f8fafc;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Modal Animation */
+        .modal {
+            transition: opacity 0.25s ease;
+        }
+        body.modal-active {
+            overflow-x: hidden;
+            overflow-y: hidden !important;
+        }
+        /* Custom scrollbar for lists */
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-slate-900 text-white shadow-lg sticky top-0 z-40">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 space-x-reverse">
+                <div class="bg-engineer-500 text-white p-2 rounded w-10 h-10 flex items-center justify-center font-bold text-xl shadow-lg">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-bold tracking-wide leading-none">ECE Portal</span>
+                    <span class="text-xs text-slate-400 font-light">بوابة الهندسة الكهربائية</span>
+                </div>
+            </div>
+            
+            <div class="hidden md:flex space-x-6 space-x-reverse font-semibold text-sm">
+                <a href="#" class="hover:text-engineer-500 transition">الرئيسية</a>
+                <a href="#levels" class="hover:text-engineer-500 transition">المستويات</a>
+                <a href="#library" class="hover:text-engineer-500 transition">المواد</a>
+                <button class="bg-engineer-600 hover:bg-engineer-500 px-4 py-2 rounded transition shadow">دخول</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative bg-slate-800 text-white py-16 px-4 overflow-hidden border-b-4 border-engineer-600">
+        <!-- Background Pattern (Circuit Board) -->
+        <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'0 0 2000/svg\'%3E%3Cpath d=\'M54.627 0l.83.828-1.415 1.415-.828-.828-.828.828-1.415-1.415.828-.828-.828-.828 1.415-1.415.828.828.828-.828 1.415 1.415-.828.828zM22.485 0l.83.828-1.415 1.415-.828-.828-.828.828-1.415-1.415.828-.828-.828-.828 1.415-1.415.828.828.828-.828 1.415 1.415-.828.828zM0 22.485l.828.83-1.415 1.415-.828-.828-.828.828L-2.83 22.485l.828-.828-.828-.828 1.415-1.415.828.828.828-.828 1.415 1.415-.828.828zM0 54.627l.828.83-1.415 1.415-.828-.828-.828.828L-2.83 54.627l.828-.828-.828-.828 1.415-1.415.828.828.828-.828 1.415 1.415-.828.828zM54.627 60l.83-.828-1.415-1.415-.828.828-.828-.828-1.415 1.415.828.828-.828.828 1.415 1.415.828-.828.828.828 1.415-1.415-.828-.828zM22.485 60l.83-.828-1.415-1.415-.828.828-.828-.828-1.415 1.415.828.828-.828.828 1.415 1.415.828-.828.828.828 1.415-1.415-.828-.828z\' fill=\'%23ffffff\' fill-opacity=\'1\' fill-rule=\'evenodd\'/%3E%3C/svg%3E');"></div>
+        
+        <div class="container mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-3/5 mb-10 md:mb-0 text-center md:text-right">
+                <span class="inline-block py-1 px-3 rounded bg-engineer-600 text-white text-sm mb-4 font-bold shadow">قسم الهندسة الكهربائية والإلكترونية</span>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">كل ما يحتاجه مهندس الكهرباء<br><span class="text-engineer-400">مراجع، امتحانات، وشروحات</span></h1>
+                <p class="text-lg text-slate-300 mb-8 max-w-2xl leading-relaxed">
+                    المنصة الموحدة لجميع مقررات الهندسة الكهربائية. تصفح المواد من السنة الثانية وحتى التخرج، وحمل أحدث المراجع والأسئلة السابقة.
+                </p>
+                <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                    <a href="#library" class="bg-engineer-500 text-white px-8 py-3 rounded font-bold shadow-lg hover:bg-engineer-400 transition transform hover:-translate-y-1 flex items-center gap-2">
+                        <i class="fas fa-book-reader"></i> تصفح المواد
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-2/5 flex justify-center">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-engineer-500 blur-3xl opacity-20 rounded-full"></div>
+                    <i class="fas fa-microchip text-9xl text-slate-700 opacity-50 absolute top-0 right-0 transform translate-x-4 -translate-y-4"></i>
+                    <i class="fas fa-broadcast-tower text-9xl text-white relative z-10 drop-shadow-2xl"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="library" class="container mx-auto px-4 py-12">
+        
+        <!-- Filter Section -->
+        <div id="levels" class="mb-10">
+            <div class="flex items-center justify-between mb-6 border-b border-slate-200 pb-4">
+                <h2 class="text-2xl font-bold text-slate-800 border-r-4 border-engineer-500 pr-3">المقررات الدراسية</h2>
+                <span class="text-sm text-slate-500 bg-slate-100 px-3 py-1 rounded-full"><i class="fas fa-list-ol mr-1"></i> <span id="countDisplay">0</span> مادة</span>
+            </div>
+            
+            <div class="flex flex-wrap gap-3 mb-8">
+                <button onclick="filterSubjects('all')" class="filter-btn active bg-slate-800 text-white px-5 py-2 rounded shadow transition hover:bg-slate-700" data-filter="all">
+                    الكل
+                </button>
+                <button onclick="filterSubjects('year2')" class="filter-btn bg-white text-slate-600 px-5 py-2 rounded shadow border border-slate-200 transition hover:bg-engineer-50 hover:text-engineer-700" data-filter="year2">
+                    <i class="fas fa-battery-quarter ml-2 text-engineer-500"></i>مواد 200 (سنة ثانية)
+                </button>
+                <button onclick="filterSubjects('year3')" class="filter-btn bg-white text-slate-600 px-5 py-2 rounded shadow border border-slate-200 transition hover:bg-engineer-50 hover:text-engineer-700" data-filter="year3">
+                    <i class="fas fa-battery-half ml-2 text-engineer-500"></i>مواد 300 (سنة ثالثة)
+                </button>
+                <button onclick="filterSubjects('year4')" class="filter-btn bg-white text-slate-600 px-5 py-2 rounded shadow border border-slate-200 transition hover:bg-engineer-50 hover:text-engineer-700" data-filter="year4">
+                    <i class="fas fa-battery-full ml-2 text-engineer-500"></i>مواد 400 (سنة رابعة)
+                </button>
+                <button onclick="filterSubjects('lab')" class="filter-btn bg-white text-slate-600 px-5 py-2 rounded shadow border border-slate-200 transition hover:bg-engineer-50 hover:text-engineer-700" data-filter="lab">
+                    <i class="fas fa-flask ml-2 text-green-500"></i>المعامل
+                </button>
+            </div>
+
+            <!-- Search -->
+            <div class="relative max-w-xl">
+                <input type="text" id="searchInput" placeholder="ابحث برمز المادة (مثال: ECE200) أو الاسم..." 
+                    class="w-full py-3 px-5 pr-10 rounded shadow-sm border border-slate-300 focus:outline-none focus:ring-2 focus:ring-engineer-500 transition">
+                <i class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+            </div>
+        </div>
+
+        <!-- Subjects Grid -->
+        <div id="subjectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Cards injected by JS -->
+        </div>
+
+        <!-- No Results -->
+        <div id="noResults" class="hidden text-center py-16">
+            <div class="inline-block p-4 rounded-full bg-slate-100 mb-4">
+                <i class="fas fa-search-minus text-4xl text-slate-400"></i>
+            </div>
+            <p class="text-lg text-slate-500">عذراً، لم نجد مادة بهذا الاسم.</p>
+        </div>
+
+    </main>
+
+    <!-- Modal (Subject Detail View) -->
+    <div id="subjectModal" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50">
+        <div class="modal-overlay absolute w-full h-full bg-slate-900 opacity-60 backdrop-blur-sm" onclick="closeModal()"></div>
+        
+        <div class="modal-container bg-white w-11/12 md:max-w-3xl mx-auto rounded-xl shadow-2xl z-50 overflow-y-auto max-h-[90vh]">
+            
+            <!-- Modal Content -->
+            <div class="modal-content text-right relative">
+                <!-- Close Button -->
+                <div class="absolute top-4 left-4 z-10 cursor-pointer" onclick="closeModal()">
+                    <div class="bg-slate-100 hover:bg-red-100 text-slate-500 hover:text-red-500 rounded-full w-8 h-8 flex items-center justify-center transition">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-slate-50 to-white px-8 py-6 border-b border-slate-100">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span id="modalCodeBadge" class="text-xs font-bold text-white bg-engineer-600 px-3 py-1 rounded shadow-sm font-mono tracking-wider"></span>
+                        <span id="modalLevelBadge" class="text-xs text-slate-500 bg-slate-200 px-2 py-1 rounded"></span>
+                    </div>
+                    <h2 id="modalTitle" class="text-2xl font-bold text-slate-800"></h2>
+                </div>
+
+                <!-- Body (Tabs & Lists) -->
+                <div class="px-8 py-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        
+                        <!-- Section 1: References -->
+                        <div>
+                            <h3 class="flex items-center gap-2 text-lg font-bold text-slate-800 mb-4 pb-2 border-b border-slate-100">
+                                <i class="fas fa-book text-engineer-500"></i> المراجع الدراسية
+                            </h3>
+                            <ul id="modalReferencesList" class="space-y-3 max-h-60 overflow-y-auto pr-2 custom-scroll">
+                                <!-- List items injected JS -->
+                            </ul>
+                        </div>
+
+                        <!-- Section 2: Exams -->
+                        <div>
+                            <h3 class="flex items-center gap-2 text-lg font-bold text-slate-800 mb-4 pb-2 border-b border-slate-100">
+                                <i class="fas fa-file-signature text-secondary-500"></i> الامتحانات السابقة
+                            </h3>
+                            <ul id="modalExamsList" class="space-y-3 max-h-60 overflow-y-auto pr-2 custom-scroll">
+                                <!-- List items injected JS -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="bg-slate-50 px-8 py-4 flex justify-between items-center">
+                    <span class="text-xs text-slate-400">تأكد من تسجيل الدخول لتحميل الملفات المحمية</span>
+                    <button onclick="closeModal()" class="bg-white border border-slate-300 text-slate-600 hover:bg-slate-100 px-6 py-2 rounded font-semibold transition shadow-sm">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preview Modal (For embedded PDF/Drive files) -->
+    <div id="previewModal" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-[60]">
+        <div class="modal-overlay absolute w-full h-full bg-black opacity-90" onclick="closePreviewModal()"></div>
+        <div class="modal-container bg-white w-full h-full md:w-11/12 md:h-[90vh] mx-auto rounded-none md:rounded-xl shadow-2xl z-50 flex flex-col">
+            <!-- Header -->
+            <div class="flex justify-between items-center bg-slate-900 text-white px-4 py-3 border-b border-slate-700">
+                <h3 id="previewTitle" class="font-bold text-lg truncate flex items-center gap-2">
+                    <i class="fas fa-eye text-engineer-500"></i>
+                    <span id="previewTitleText">معاينة الملف</span>
+                </h3>
+                <button onclick="closePreviewModal()" class="text-slate-400 hover:text-white hover:bg-slate-800 rounded-full w-8 h-8 flex items-center justify-center transition">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <!-- Iframe Container -->
+            <div class="flex-grow bg-slate-200 relative">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <i class="fas fa-spinner fa-spin text-4xl text-slate-400"></i>
+                </div>
+                <iframe id="previewFrame" src="" class="absolute inset-0 w-full h-full border-0 z-10 bg-white" allow="autoplay"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 left-5 bg-slate-800 text-white shadow-xl rounded px-6 py-3 flex items-center gap-3 transform translate-y-24 opacity-0 transition-all duration-300 z-[70]">
+        <div class="bg-green-500 rounded-full p-1"><i class="fas fa-check text-xs text-white"></i></div>
+        <div>
+            <h4 class="font-bold text-sm">تنبيه</h4>
+            <p class="text-xs text-slate-300" id="toastMessage">...</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-10 mt-12 text-sm border-t border-slate-800">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-bolt text-engineer-500 text-xl"></i>
+                <span class="font-bold text-slate-200">بوابة الهندسة الكهربائية</span>
+            </div>
+            <div class="text-center md:text-right">
+                <p>&copy; 2025 جميع الحقوق محفوظة لطلاب القسم.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logic -->
+    <script>
+        /*
+          قاعدة بيانات المواد - الهندسة الكهربائية
+        */
+        const subjectsData = [
+            // --- مستوى 200 ---
+            {
+                id: 200,
+                code: "ECE200",
+                title: "مبادئ هندسة كهربائية",
+                level: "year2",
+                icon: "fa-plug",
+                references: [
+                    // هنا قمنا بإضافة الملف الجديد بخاصية type: 'embed'
+                    { 
+                        name: "المرجع الأساسي (معاينة مباشرة)", 
+                        size: "معاينة", 
+                        // تم تحويل الرابط إلى preview
+                        url: "https://drive.google.com/file/d/1ffflaW4PhNQIV2YX2WWtXBO6Vy6ri3rT/preview", 
+                        type: "embed" 
+                    },
+                    { name: "📂 مجلد المحاضرات (Google Drive)", size: "Cloud", url: "https://drive.google.com/drive/folders/1K54zsc0YQLzMjrN5DRfiZWt5wScQzjam?usp=sharing" },
+                    { name: "Fundamentals of Electric Circuits", size: "15 MB", url: "#" }, 
+                    { name: "شرح عربي - د. أحمد", size: "8 MB", url: "#" }
+                ],
+                exams: [{ name: "Midterm 2023", size: "2 MB", url: "#" }]
+            },
+            {
+                id: 220,
+                code: "ECE220",
+                title: "أساسيات دوائر إلكترونية",
+                level: "year2",
+                icon: "fa-microchip",
+                references: [{ name: "Microelectronic Circuits (Sedra)", size: "40 MB", url: "#" }],
+                exams: [{ name: "Final 2022", size: "3 MB", url: "#" }]
+            },
+            {
+                id: 201,
+                code: "ECE201",
+                title: "دوائر كهربائية 1",
+                level: "year2",
+                icon: "fa-bezier-curve",
+                references: [{ name: "Circuit Analysis Book", size: "20 MB", url: "#" }],
+                exams: [{ name: "Quiz Collection", size: "1 MB", url: "#" }]
+            },
+            {
+                id: 221,
+                code: "ECE221",
+                title: "إلكترونيات تماثلية",
+                level: "year2",
+                icon: "fa-wave-square",
+                references: [{ name: "Analog Electronics Notes", size: "12 MB", url: "#" }],
+                exams: []
+            },
+            {
+                id: 230,
+                code: "ECE230",
+                title: "مقدمة أنظمة رقمية",
+                level: "year2",
+                icon: "fa-calculator",
+                references: [{ name: "Digital Design (Morris Mano)", size: "25 MB", url: "#" }],
+                exams: [{ name: "Midterm Solved", size: "2 MB", url: "#" }]
+            },
+            {
+                id: 270,
+                code: "ECE270",
+                title: "قياسات كهربائية وإلكترونية",
+                level: "year2",
+                icon: "fa-tachometer-alt",
+                references: [{ name: "Measurements Lab Manual", size: "5 MB", url: "#" }],
+                exams: []
+            },
+            
+            // --- مستوى 300 ---
+            {
+                id: 302,
+                code: "ECE302",
+                title: "دوائر كهربائية 2",
+                level: "year3",
+                icon: "fa-project-diagram",
+                references: [{ name: "Advanced Circuits Notes", size: "10 MB", url: "#" }],
+                exams: [{ name: "Final 2023", size: "2 MB", url: "#" }]
+            },
+            {
+                id: 303,
+                code: "ECE303",
+                title: "معمل دوائر كهربائية 1",
+                level: "lab",
+                icon: "fa-flask",
+                references: [{ name: "Lab Manual Part 1", size: "4 MB", url: "#" }],
+                exams: [{ name: "Lab Exam Sample", size: "1 MB", url: "#" }]
+            },
+            {
+                id: 340,
+                code: "ECE340",
+                title: "كهرومغناطيسيات 1",
+                level: "year3",
+                icon: "fa-magnet",
+                references: [{ name: "Electromagnetics by Sadiku", size: "30 MB", url: "#" }],
+                exams: [{ name: "Midterm Problems", size: "3 MB", url: "#" }]
+            },
+            {
+                id: 350,
+                code: "ECE350",
+                title: "التحويل الكهروميكانيكي للطاقة",
+                level: "year3",
+                icon: "fa-charging-station",
+                references: [{ name: "Electric Machinery Fundamentals", size: "35 MB", url: "#" }],
+                exams: []
+            },
+            {
+                id: 360,
+                code: "ECE360",
+                title: "إشارات ونظم",
+                level: "year3",
+                icon: "fa-signal",
+                references: [{ name: "Signals & Systems (Oppenheim)", size: "45 MB", url: "#" }],
+                exams: [{ name: "Final Exam 2021", size: "4 MB", url: "#" }]
+            },
+            {
+                id: 380,
+                code: "ECE380",
+                title: "أنظمة تحكم 1",
+                level: "year3",
+                icon: "fa-gamepad",
+                references: [{ name: "Automatic Control Systems", size: "22 MB", url: "#" }],
+                exams: []
+            },
+            {
+                id: 316,
+                code: "ECE316",
+                title: "طرق التحليل العددي",
+                level: "year3",
+                icon: "fa-square-root-alt",
+                references: [{ name: "Numerical Methods for Engineers", size: "18 MB", url: "#" }],
+                exams: []
+            },
+            {
+                id: 321,
+                code: "ECE321",
+                title: "معمل إلكترونيات",
+                level: "lab",
+                icon: "fa-vial",
+                references: [{ name: "Electronics Lab Manual", size: "6 MB", url: "#" }],
+                exams: []
+            },
+            {
+                id: 330,
+                code: "ECE330",
+                title: "معالجات دقيقة 1",
+                level: "year3",
+                icon: "fa-memory",
+                references: [{ name: "Microprocessor Architecture", size: "28 MB", url: "#" }],
+                exams: [{ name: "Assembly Code Examples", size: "1 MB", url: "#" }]
+            },
+            {
+                id: 361,
+                code: "ECE361",
+                title: "هندسة اتصالات 1",
+                level: "year3",
+                icon: "fa-broadcast-tower",
+                references: [{ name: "Communication Systems (Haykin)", size: "50 MB", url: "#" }],
+                exams: [{ name: "Midterm 2022", size: "2 MB", url: "#" }]
+            },
+            {
+                id: 381,
+                code: "ECE381",
+                title: "أنظمة تحكم 2",
+                level: "year3",
+                icon: "fa-robot",
+                references: [{ name: "Modern Control Engineering", size: "33 MB", url: "#" }],
+                exams: []
+            },
+
+            // --- مستوى 400 ---
+            {
+                id: 412,
+                code: "ECE412",
+                title: "معمل دوائر كهربائية 2",
+                level: "lab",
+                icon: "fa-tools",
+                references: [{ name: "Lab Manual Part 2", size: "5 MB", url: "#" }],
+                exams: []
+            },
+            {
+                id: 434,
+                code: "ECE434",
+                title: "معمل أنظمة رقمية",
+                level: "lab",
+                icon: "fa-laptop-code",
+                references: [{ name: "Digital Lab Experiments", size: "7 MB", url: "#" }],
+                exams: []
+            },
+            {
+                id: 438,
+                code: "ECE438",
+                title: "معمل معالجات دقيقة 1",
+                level: "lab",
+                icon: "fa-sd-card",
+                references: [{ name: "Microprocessor Lab Manual", size: "6 MB", url: "#" }],
+                exams: []
+            }
+        ];
+
+        // --- Functions ---
+
+        const grid = document.getElementById('subjectsGrid');
+        const noResults = document.getElementById('noResults');
+        const searchInput = document.getElementById('searchInput');
+        const countDisplay = document.getElementById('countDisplay');
+
+        // Initialize
+        renderSubjects(subjectsData);
+
+        function renderSubjects(data) {
+            grid.innerHTML = '';
+            countDisplay.textContent = data.length;
+            
+            if (data.length === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+                data.forEach(sub => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-white rounded-lg shadow-sm hover:shadow-md border border-slate-200 transition-all cursor-pointer group card-hover';
+                    card.onclick = () => openSubjectModal(sub.id);
+                    
+                    // Determine Level Label
+                    let levelLabel = "عام";
+                    let levelColor = "bg-slate-100 text-slate-500";
+                    if(sub.level === 'year2') { levelLabel = "سنة ثانية"; levelColor = "bg-blue-50 text-blue-600"; }
+                    if(sub.level === 'year3') { levelLabel = "سنة ثالثة"; levelColor = "bg-orange-50 text-orange-600"; }
+                    if(sub.level === 'year4') { levelLabel = "سنة رابعة"; levelColor = "bg-purple-50 text-purple-600"; }
+                    if(sub.level === 'lab')   { levelLabel = "معمل"; levelColor = "bg-green-50 text-green-600"; }
+
+                    card.innerHTML = `
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-12 h-12 rounded-lg bg-engineer-50 text-engineer-600 flex items-center justify-center text-2xl group-hover:bg-engineer-500 group-hover:text-white transition">
+                                    <i class="fas ${sub.icon}"></i>
+                                </div>
+                                <span class="text-xs font-bold font-mono tracking-wider text-slate-500 border border-slate-200 px-2 py-1 rounded bg-white">${sub.code}</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-800 mb-2 leading-snug group-hover:text-engineer-600 transition">${sub.title}</h3>
+                            <div class="flex items-center justify-between mt-4">
+                                <span class="text-xs font-semibold px-2 py-1 rounded ${levelColor}">${levelLabel}</span>
+                                <div class="flex gap-2 text-slate-400 text-xs">
+                                    <span title="مراجع"><i class="fas fa-book"></i> ${sub.references.length}</span>
+                                    <span title="امتحانات"><i class="fas fa-file"></i> ${sub.exams.length}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+        }
+
+        function filterSubjects(filter) {
+            // Update buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if(btn.dataset.filter === filter) {
+                    btn.classList.remove('bg-white', 'text-slate-600');
+                    btn.classList.add('bg-slate-800', 'text-white');
+                } else {
+                    btn.classList.add('bg-white', 'text-slate-600');
+                    btn.classList.remove('bg-slate-800', 'text-white');
+                }
+            });
+
+            // Filter data
+            if (filter === 'all') {
+                renderSubjects(subjectsData);
+            } else if (filter === 'lab') {
+                const filtered = subjectsData.filter(item => item.level === 'lab');
+                renderSubjects(filtered);
+            } else {
+                const filtered = subjectsData.filter(item => item.level === filter);
+                renderSubjects(filtered);
+            }
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = subjectsData.filter(item => 
+                item.title.toLowerCase().includes(term) || 
+                item.code.toLowerCase().includes(term)
+            );
+            renderSubjects(filtered);
+            if(term.length > 0) {
+                 document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.add('bg-white', 'text-slate-600');
+                    btn.classList.remove('bg-slate-800', 'text-white');
+                });
+            }
+        });
+
+        // --- Modal Logic ---
+
+        function openSubjectModal(id) {
+            const subject = subjectsData.find(s => s.id === id);
+            if (!subject) return;
+
+            document.getElementById('modalTitle').textContent = subject.title;
+            document.getElementById('modalCodeBadge').textContent = subject.code;
+            
+            let levelLabel = "عام";
+            if(subject.level === 'year2') levelLabel = "السنة الثانية";
+            if(subject.level === 'year3') levelLabel = "السنة الثالثة";
+            if(subject.level === 'year4') levelLabel = "السنة الرابعة";
+            if(subject.level === 'lab') levelLabel = "مقرر معملي";
+            document.getElementById('modalLevelBadge').textContent = levelLabel;
+
+            renderList('modalReferencesList', subject.references, 'fa-file-pdf', 'text-red-500');
+            renderList('modalExamsList', subject.exams, 'fa-file-alt', 'text-secondary-500');
+
+            const modal = document.getElementById('subjectModal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            document.body.classList.add('modal-active');
+        }
+
+        function renderList(elementId, items, iconClass, iconColorClass) {
+            const list = document.getElementById(elementId);
+            list.innerHTML = '';
+            
+            if(items.length > 0) {
+                items.forEach(item => {
+                    const hasUrl = item.url && item.url !== '#' && item.url.trim() !== '';
+                    
+                    let actionBtn = '';
+                    
+                    if (!hasUrl) {
+                        actionBtn = `<button onclick="showToast('${item.name}', 'الملف غير متوفر حالياً')" class="bg-slate-50 text-slate-400 cursor-not-allowed px-3 py-1 rounded text-sm"><i class="fas fa-lock ml-1"></i> مغلق</button>`;
+                    } else if (item.type === 'embed') {
+                        // زر معاينة مباشر
+                        actionBtn = `<button onclick="openPreviewModal('${item.url}', '${item.name}')" class="bg-engineer-50 text-engineer-600 hover:bg-engineer-600 hover:text-white px-3 py-1 rounded text-sm transition font-bold"><i class="fas fa-eye ml-1"></i> معاينة</button>`;
+                    } else {
+                        // زر تحميل عادي
+                        actionBtn = `<a href="${item.url}" target="_blank" class="bg-slate-50 text-slate-600 hover:bg-slate-600 hover:text-white px-3 py-1 rounded text-sm transition font-bold"><i class="fas fa-external-link-alt ml-1"></i> فتح</a>`;
+                    }
+
+                    list.innerHTML += `
+                        <li class="flex items-center justify-between p-3 bg-white rounded border border-slate-100 shadow-sm hover:shadow-md transition">
+                            <div class="flex items-center gap-3 overflow-hidden">
+                                <div class="bg-slate-50 w-10 h-10 rounded flex items-center justify-center flex-shrink-0">
+                                    <i class="fas ${iconClass} ${iconColorClass} text-lg"></i>
+                                </div>
+                                <div class="truncate">
+                                    <p class="text-sm font-bold text-slate-700 truncate">${item.name}</p>
+                                    <p class="text-xs text-slate-400 font-mono">${item.size}</p>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 mr-2">
+                                ${actionBtn}
+                            </div>
+                        </li>
+                    `;
+                });
+            } else {
+                list.innerHTML = `
+                    <li class="flex flex-col items-center justify-center py-6 text-slate-400 bg-slate-50 rounded border border-dashed border-slate-200">
+                        <i class="fas fa-folder-open text-2xl mb-2 opacity-50"></i>
+                        <span class="text-xs">لا توجد ملفات مضافة</span>
+                    </li>`;
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('subjectModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            document.body.classList.remove('modal-active');
+        }
+
+        // --- Preview Modal Logic ---
+        function openPreviewModal(url, title) {
+            const modal = document.getElementById('previewModal');
+            const frame = document.getElementById('previewFrame');
+            const titleEl = document.getElementById('previewTitleText');
+            
+            titleEl.textContent = title;
+            frame.src = url;
+            
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function closePreviewModal() {
+            const modal = document.getElementById('previewModal');
+            const frame = document.getElementById('previewFrame');
+            
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            // Clear src to stop video/loading when closed
+            setTimeout(() => { frame.src = ''; }, 300);
+        }
+
+        function showToast(fileName, customMsg) {
+            const toast = document.getElementById('toast');
+            const msg = document.getElementById('toastMessage');
+            
+            msg.textContent = customMsg || `جاري التحميل: ${fileName}`;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+    </script>
+</body>
+</html>
